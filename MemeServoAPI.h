@@ -157,7 +157,7 @@ typedef void (*MMS_NODE_ERROR_CALLBACK)(uint8_t node_addr, uint8_t err);
   * @note   For none intrerupt receive function, pass receive function pointer as parameter
   *         RecvDataImpl and call MMS_OnData(...) in receive function. For interrupt receive
   *         mode, pass NULL as parameter RecvDataImpl and call MMS_OnData(...) in ISR. Call
-  *         this before using get & set funtions
+  *         this before using other get & set funtions
   * @param  protocol: MMS_PROTOCOL_UART or MMS_PROTOCOL_I2C
   * @param  address_master: master node address
   * @param  SendDataImpl: send data function pointer
