@@ -183,9 +183,9 @@ void MMS_SetTimerFunction(uint32_t (*GetMilliSecondsImpl)(void), void (*DelayMil
 
 
 /**
-  * @brief  Set timer releated function
+  * @brief  Set command timeout value
   * @note   Call this before using get & set funtions. Default value is 255ms
-  * @param  GetMilliSecondsImpl: pointer of function to get miliseconds
+  * @param  timeout: timeout in miliseconds
   * @param  DelayMilliSecondsImpl: pointer of function to delay miliseconds
   * @retval None
   */
