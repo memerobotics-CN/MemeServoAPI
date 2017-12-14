@@ -148,8 +148,9 @@ static uint32_t (*_get_milli_seconds_impl)(void) = NULL;
 uint8_t MMS_ProtocolLRC(uint8_t *lrcBytes, uint8_t lrcByteCount)
 {
   uint8_t lrc = 0;
+  uint8_t i;
 
-  for (uint8_t i = 0; i < lrcByteCount; i++)
+  for (i = 0; i < lrcByteCount; i++)
   {
     lrc ^= lrcBytes[i];
   }
@@ -183,7 +184,8 @@ uint8_t MMS_SendCmd(uint8_t addr, uint8_t cmd, uint8_t* data, uint8_t nb_data)
   plop[4] = cmd;
   plop[5] = nb_data;
 
-  for (uint8_t i = 0; i < nb_data; i++)
+  uint8_t i;
+  for (i = 0; i < nb_data; i++)
   {
     plop[6 + i] = data[i];
   }
@@ -251,7 +253,9 @@ uint8_t MMS_GetResponse(uint8_t addr, uint8_t cmd, uint16_t time_out, void *resp
       uint8_t node_addr = _packet_data[OWN_ID_BYTE_NUM];
       uint8_t nb_err = _packet_data[DATA_CNT_BYTE_NUM]; // count
 
-      for (uint8_t i=0; i<MIN(nb_err, sizeof(_packet_data) - 5); i++)
+      uint8_t i;
+      
+      for (i=0; i<MIN(nb_err, sizeof(_packet_data) - 5); i++)
       {
         error_callback(node_addr, _packet_data[i + DATA_START_BYTE_NUM]);
       }
@@ -432,7 +436,8 @@ void MMS_OnData(uint8_t data)
 
     /*
     printf("Recv from device: 0x55 0xaa ");
-    for (int i=0; i<=DATA_START_BYTE_NUM + _packet_data[DATA_CNT_BYTE_NUM]; i++)
+    int i;
+    for (i=0; i<=DATA_START_BYTE_NUM + _packet_data[DATA_CNT_BYTE_NUM]; i++)
         printf("0x%02x ", _packet_data[i]);
     printf("\n");
     */
