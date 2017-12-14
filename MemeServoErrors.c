@@ -53,7 +53,9 @@ static REACTION_NAME reaction_names[] =
 
 const char* MMS_GetErrorName(uint8_t error)
 {
-    for (uint8_t i=0; i<sizeof(error_names); i++)
+    uint8_t i;
+    
+    for (i=0; i<sizeof(error_names); i++)
     {
         if (error_names[i].error == error)
         {
@@ -67,7 +69,9 @@ const char* MMS_GetErrorName(uint8_t error)
 
 const char* MMS_GetReactionName(uint8_t reaction)
 {
-    for (uint8_t i=0; i<sizeof(reaction_names); i++)
+    uint8_t i;
+    
+    for (i=0; i<sizeof(reaction_names); i++)
     {
         if (reaction_names[i].reaction == reaction)
         {
