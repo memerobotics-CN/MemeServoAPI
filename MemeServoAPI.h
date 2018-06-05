@@ -144,6 +144,7 @@ typedef void (*MMS_NODE_ERROR_CALLBACK)(uint8_t node_addr, uint8_t err);
 #define MMS_MODE_ZERO      1     /* Start & move to costumer set zero */
 #define MMS_MODE_KEEP      2     /* Start in place & keep position */
 #define MMS_MODE_LEARNING  3     /* Enter learning mode */
+#define MMS_MODE_OFFSET    4     /* Start & make position = encoder - custom offset */
 
 
 
@@ -375,6 +376,20 @@ uint8_t MMS_AbsolutePositionMove(uint8_t address, int32_t pos, MMS_NODE_ERROR_CA
 uint8_t MMS_RelativePositionMove(uint8_t address, int32_t pos, MMS_NODE_ERROR_CALLBACK error_callback);
 
 
+
+/**
+  * @brief  Let servo move to position with desired time
+  * @note   4096 ticks = 1 turn
+  * @param  address: address of servo
+  * @param  time: desired time in ms
+  * @param  pos: desired relative position
+  * @param  error_callback: callback function of type MMS_NODE_ERROR_CALLBACK, can be NULL
+  * @retval MMS_RESP_SUCCESS: success
+  *          Others: failed, see definition of API return values
+  */
+uint8_t MMS_TimedAbsolutePositionMove(uint8_t address, uint16_t time, int32_t pos, MMS_NODE_ERROR_CALLBACK error_callback);
+
+
 /**
   * @brief  Let servo speed up/down to specified velocity with set acceleration, then move with specified velocity
   * @note   Unreachable velocity will cause servo stop
@@ -445,6 +460,19 @@ uint8_t MMS_SetAbsolutePositionSetpoint(uint8_t address, int32_t pos, MMS_NODE_E
   *          Others: failed, see definition of API return values
   */
 uint8_t MMS_SetRelativePositionSetpoint(uint8_t address, int32_t pos, MMS_NODE_ERROR_CALLBACK error_callback);
+
+
+/**
+  * @brief  Set timed absolute position move set point
+  * @note   Servo starts to move after MMS_GlobalMove() called
+  * @param  address: address of servo
+  * @param  time: desired time in ms
+  * @param  pos: ausolute position
+  * @param  error_callback: callback function of type MMS_NODE_ERROR_CALLBACK, can be NULL
+  * @retval MMS_RESP_SUCCESS: success
+  *          Others: failed, see definition of API return values
+  */
+uint8_t MMS_SetTimedAbsolutePositionSetpoint(uint8_t address, uint16_t time, int32_t pos, MMS_NODE_ERROR_CALLBACK error_callback);
 
 
 /**

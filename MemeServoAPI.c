@@ -71,7 +71,9 @@ enum {
   /*0x21*/	MMS_CMD_SET_ERROR_REACTION,
   /*0x22*/	MMS_CMD_RESET_ERROR,
   /*0x23*/	MMS_CMD_SET_ERROR_REPORTING_LEVEL,
-  /*0x24*/	MMS_CMD_SET_COMMANDS_END
+  /*0x24*/	MMS_CMD_TIMED_ABSOLUTE_POSITION_MOVE,
+  /*0x25*/	MMS_CMD_SET_TIMED_ABSOLUTE_POSITION_SETPOINT,
+  /*0x26*/	MMS_CMD_SET_COMMANDS_END
 };
 
 
@@ -724,6 +726,30 @@ uint8_t MMS_RelativePositionMove(uint8_t address, int32_t pos, MMS_NODE_ERROR_CA
 }
 
 
+uint8_t MMS_TimedAbsolutePositionMove(uint8_t address, uint16_t time, int32_t pos, MMS_NODE_ERROR_CALLBACK error_callback)
+{
+  uint8_t err;
+
+  const uint8_t nb_data = 6;
+  uint8_t data[nb_data];
+
+  data[0] = (uint8_t)time;
+  data[1] = (uint8_t)(time >> 8);
+
+  data[2] = (uint8_t)pos;
+  data[3] = (uint8_t)(pos >> 8);
+  data[4] = (uint8_t)(pos >> 16);
+  data[5] = (uint8_t)(pos >> 24);
+
+  err = MMS_SendCmd(address, MMS_CMD_TIMED_ABSOLUTE_POSITION_MOVE, data, nb_data);
+
+  if (err == MMS_RESP_SUCCESS)
+    err = MMS_GetResponse(address, MMS_CMD_TIMED_ABSOLUTE_POSITION_MOVE, _timeout, NULL, NULL, error_callback);
+
+  return err;
+}
+
+
 uint8_t MMS_ProfiledVelocityMove(uint8_t address, int16_t velocity, MMS_NODE_ERROR_CALLBACK error_callback)
 {
   uint8_t err;
@@ -841,6 +867,30 @@ uint8_t MMS_SetRelativePositionSetpoint(uint8_t address, int32_t pos, MMS_NODE_E
 
   if (err == MMS_RESP_SUCCESS)
     err = MMS_GetResponse(address, MMS_CMD_SET_RELATIVE_POSITION_SETPOINT, _timeout, NULL, NULL, error_callback);
+
+  return err;
+}
+
+
+uint8_t MMS_SetTimedAbsolutePositionSetpoint(uint8_t address, uint16_t time, int32_t pos, MMS_NODE_ERROR_CALLBACK error_callback)
+{
+  uint8_t err;
+
+  const uint8_t nb_data = 6;
+  uint8_t data[nb_data];
+
+  data[0] = (uint8_t)time;
+  data[1] = (uint8_t)(time >> 8);
+
+  data[2] = (uint8_t)pos;
+  data[3] = (uint8_t)(pos >> 8);
+  data[4] = (uint8_t)(pos >> 16);
+  data[5] = (uint8_t)(pos >> 24);
+
+  err = MMS_SendCmd(address, MMS_CMD_SET_TIMED_ABSOLUTE_POSITION_SETPOINT, data, nb_data);
+
+  if (err == MMS_RESP_SUCCESS)
+    err = MMS_GetResponse(address, MMS_CMD_SET_TIMED_ABSOLUTE_POSITION_SETPOINT, _timeout, NULL, NULL, error_callback);
 
   return err;
 }
