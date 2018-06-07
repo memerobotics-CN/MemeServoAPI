@@ -59,7 +59,7 @@ typedef void (*MMS_NODE_ERROR_CALLBACK)(uint8_t node_addr, uint8_t err);
 /* Exported constants --------------------------------------------------------*/
 
 /* Only matched major version could work */
-#define FW_VER_MAJOR 2
+#define FW_VER_MAJOR 3
 #define FW_VER_MINOR 0
 
 
@@ -143,9 +143,9 @@ typedef void (*MMS_NODE_ERROR_CALLBACK)(uint8_t node_addr, uint8_t err);
  */
 #define MMS_MODE_RESET     0     /* Start in place & reset position */
 #define MMS_MODE_ZERO      1     /* Start & move to costumer set zero */
-#define MMS_MODE_KEEP      2     /* Start in place & keep position */
-#define MMS_MODE_LEARNING  3     /* Enter learning mode */
-#define MMS_MODE_OFFSET    4     /* Start & make position = encoder - custom offset */
+#define MMS_MODE_OFFSET    2     /* Start & make position = encoder - custom offset */
+#define MMS_MODE_KEEP      3     /* Start in place & keep position */
+#define MMS_MODE_LEARNING  4     /* Enter learning mode */
 
 
 
