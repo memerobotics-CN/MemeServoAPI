@@ -42,13 +42,13 @@ typedef enum
 /* Control status */
 enum
 {
-	MMS_CTRL_STATUS_NO_CONTROL,
-	MMS_CTRL_STATUS_POSITION_CONTROL,
-	MMS_CTRL_STATUS_TIMED_POSITION_CONTROL,
-	MMS_CTRL_STATUS_VELOCITY_CONTROL,
-	MMS_CTRL_STATUS_PROFILED_VELOCITY_CONTROL,
-	MMS_CTRL_STATUS_PROFILED_POSITION_CONTROL,
-	MMS_CTRL_STATUS_LEARNING
+    MMS_CTRL_STATUS_NO_CONTROL,
+    MMS_CTRL_STATUS_POSITION_CONTROL,
+    MMS_CTRL_STATUS_TIMED_POSITION_CONTROL,
+    MMS_CTRL_STATUS_VELOCITY_CONTROL,
+    MMS_CTRL_STATUS_PROFILED_VELOCITY_CONTROL,
+    MMS_CTRL_STATUS_PROFILED_POSITION_CONTROL,
+    MMS_CTRL_STATUS_LEARNING
 };
 
 
@@ -68,52 +68,52 @@ typedef void (*MMS_NODE_ERROR_CALLBACK)(uint8_t node_addr, uint8_t err);
 /*
  * Servo error codes
  */
-#define MMS_RESP_MOTOR_STALLED                         (0x00 + 0x01)  /* error */
-#define MMS_RESP_ENCODER_OVERFLOW                      (0x00 + 0x02)  /* error */
-#define MMS_RESP_ENCODER_UNDERFLOW                     (0x00 + 0x03)  /* error */
-#define MMS_RESP_ERROR_MOTOR_OVER_CURRENT              (0x00 + 0x04)  /* error */
+#define MMS_ERR_MOTOR_STALLED                         (0x00 + 0x01)  /* error */
+#define MMS_ERR_ENCODER_OVERFLOW                      (0x00 + 0x02)  /* error */
+#define MMS_ERR_ENCODER_UNDERFLOW                     (0x00 + 0x03)  /* error */
+#define MMS_ERR_ERROR_MOTOR_OVER_CURRENT              (0x00 + 0x04)  /* error */
 
 /*
  * command related errors
  */
-#define MMS_RESP_COMMAND_INVALID_COMMAND               (0x20 + 0x01)  /* error */
-#define MMS_RESP_COMMAND_INVALID_SET_COMMAND_BYTECOUNT (0x20 + 0x02)  /* error */
-#define MMS_RESP_COMMAND_INVALID_ARGUMENT              (0x20 + 0x03)  /* error */
-#define MMS_RESP_COMMAND_INVALID_FOR_MOTOR_STATE       (0x20 + 0x04)  /* error */
-#define MMS_RESP_COMMAND_INVALID_GET_BYTECOUNT         (0x20 + 0x05)  /* warning */
+#define MMS_ERR_COMMAND_INVALID_COMMAND               (0x20 + 0x01)  /* error */
+#define MMS_ERR_COMMAND_INVALID_SET_COMMAND_BYTECOUNT (0x20 + 0x02)  /* error */
+#define MMS_ERR_COMMAND_INVALID_ARGUMENT              (0x20 + 0x03)  /* error */
+#define MMS_ERR_COMMAND_INVALID_FOR_MOTOR_STATE       (0x20 + 0x04)  /* error */
+#define MMS_ERR_COMMAND_INVALID_GET_BYTECOUNT         (0x20 + 0x05)  /* warning */
 
 /*
  * i2c related errors
  */
-#define MMS_RESP_I2C_ERROR_NODEV                       (0x40 + 0x01)  /* error */
-#define MMS_RESP_I2C_ERROR_BUS_ERROR                   (0x40 + 0x02)  /* error */
-#define MMS_RESP_I2C_ERROR_ARBITRATION_LOST            (0x40 + 0x03)  /* warning */
-#define MMS_RESP_I2C_ERROR_INDETERMINATE               (0x40 + 0x04)  /* error */
-#define MMS_RESP_I2C_ERROR_WAIT_ON_BUS_READY_TIMEOUT   (0x40 + 0x05)  /* error */
-#define MMS_RESP_I2C_ERROR_WAIT_ON_TRANSMIT_TIMEOUT    (0x40 + 0x06)  /* error */
-#define MMS_RESP_I2C_ERROR_WAIT_ON_RECEIVE_TIMEOUT     (0x40 + 0x07)  /* error */
+#define MMS_ERR_I2C_ERROR_NODEV                       (0x40 + 0x01)  /* error */
+#define MMS_ERR_I2C_ERROR_BUS_ERROR                   (0x40 + 0x02)  /* error */
+#define MMS_ERR_I2C_ERROR_ARBITRATION_LOST            (0x40 + 0x03)  /* warning */
+#define MMS_ERR_I2C_ERROR_INDETERMINATE               (0x40 + 0x04)  /* error */
+#define MMS_ERR_I2C_ERROR_WAIT_ON_BUS_READY_TIMEOUT   (0x40 + 0x05)  /* error */
+#define MMS_ERR_I2C_ERROR_WAIT_ON_TRANSMIT_TIMEOUT    (0x40 + 0x06)  /* error */
+#define MMS_ERR_I2C_ERROR_WAIT_ON_RECEIVE_TIMEOUT     (0x40 + 0x07)  /* error */
 
-#define MMS_RESP_I2C_ERROR_RX_PACKET_OVERWRITTEN       (0x40 + 0x11)  /* error */
-#define MMS_RESP_I2C_ERROR_INVALID_RX_BYTECOUNT        (0x40 + 0x12)  /* error */
+#define MMS_ERR_I2C_ERROR_RX_PACKET_OVERWRITTEN       (0x40 + 0x11)  /* error */
+#define MMS_ERR_I2C_ERROR_INVALID_RX_BYTECOUNT        (0x40 + 0x12)  /* error */
 
 /*
  * uart related errors
  */
-#define MMS_RESP_UART_ERROR_MEMORY_ALLOCATION_ERROR    (0x60 + 0x01)  /* error, during initialization memory was not enough */
-#define MMS_RESP_UART_ERROR_RX_BUFFER_EMPTY            (0x60 + 0x02)  /* error, there is no character in buffer or fifo */
-#define MMS_RESP_UART_ERROR_RX_FRAME_ERROR             (0x60 + 0x03)  /* error, frame receive error (check host settings) */
-#define MMS_RESP_UART_ERROR_RX_PARITY_ERROR            (0x60 + 0x04)  /* error, parity receive error (check host settings) */
-#define MMS_RESP_UART_ERROR_RX_BUFFER_OVERFLOW         (0x60 + 0x05)  /* error, buffer overflow, user code needs to call getChar() more frequently */
-#define MMS_RESP_UART_ERROR_RX_DATA_OVERRUN            (0x60 + 0x06)  /* error, FIFO overflow, more ISR time is needed */
-#define MMS_RESP_UART_ERROR_TX_TIMEOUT                 (0x60 + 0x07)  /* error, no space in Tx buffer for transmit_timeout_miliseconds */
+#define MMS_ERR_UART_ERROR_MEMORY_ALLOCATION_ERROR    (0x60 + 0x01)  /* error, during initialization memory was not enough */
+#define MMS_ERR_UART_ERROR_RX_BUFFER_EMPTY            (0x60 + 0x02)  /* error, there is no character in buffer or fifo */
+#define MMS_ERR_UART_ERROR_RX_FRAME_ERROR             (0x60 + 0x03)  /* error, frame receive error (check host settings) */
+#define MMS_ERR_UART_ERROR_RX_PARITY_ERROR            (0x60 + 0x04)  /* error, parity receive error (check host settings) */
+#define MMS_ERR_UART_ERROR_RX_BUFFER_OVERFLOW         (0x60 + 0x05)  /* error, buffer overflow, user code needs to call getChar() more frequently */
+#define MMS_ERR_UART_ERROR_RX_DATA_OVERRUN            (0x60 + 0x06)  /* error, FIFO overflow, more ISR time is needed */
+#define MMS_ERR_UART_ERROR_TX_TIMEOUT                 (0x60 + 0x07)  /* error, no space in Tx buffer for transmit_timeout_miliseconds */
 
-#define MMS_RESP_UART_ERROR_HALF_PACKET                (0x60 + 0x11)  /* error */
+#define MMS_ERR_UART_ERROR_HALF_PACKET                (0x60 + 0x11)  /* error */
 
 /*
  * protocol related errors
  */
-#define MMS_RESP_PROTOCOL_ERROR_RESPONSE_TIMEOUT       (0x80 + 0x01)  /* error */
-#define MMS_RESP_PROTOCOL_WRONG_LRC                    (0x80 + 0x02)  /* error */
+#define MMS_ERR_PROTOCOL_ERROR_RESPONSE_TIMEOUT       (0x80 + 0x01)  /* error */
+#define MMS_ERR_PROTOCOL_WRONG_LRC                    (0x80 + 0x02)  /* error */
 
 
 
@@ -135,6 +135,7 @@ typedef void (*MMS_NODE_ERROR_CALLBACK)(uint8_t node_addr, uint8_t err);
 #define MMS_RESP_INVALID_OUT_BUFFER_SIZE               0x04           /* local error, out buffer size not matched to returned data */
 #define MMS_RESP_UNMATCHED_ADDR                        0x05           /* local error, unmatched node id between returned and waiting */
 #define MMS_RESP_UNMATCHED_CMD                         0x06           /* local error, unmatched command between returned and waiting */
+#define MMS_RESP_WRONG_LRC                             0x07           /* local error, lrc error */
 #define MMS_RESP_SERVO_ERROR                           0xFF           /* servo error, error call back will be called with servo error codes listed above */
 
 

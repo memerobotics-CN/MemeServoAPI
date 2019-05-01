@@ -244,7 +244,7 @@ uint8_t MMS_GetResponse(uint8_t addr, uint8_t cmd, uint16_t time_out, void *resp
   if (lrc != _packet_data[DATA_START_BYTE_NUM + _packet_data[DATA_CNT_BYTE_NUM]])
   {
     _is_whole_packet = 0;
-    return MMS_RESP_PROTOCOL_WRONG_LRC;
+    return MMS_RESP_WRONG_LRC;
   }
 
   // check if response is error
@@ -257,7 +257,7 @@ uint8_t MMS_GetResponse(uint8_t addr, uint8_t cmd, uint16_t time_out, void *resp
 
       uint8_t i;
       
-      for (i=0; i<MIN(nb_err, sizeof(_packet_data) - 5); i++)
+      for (i=0; i<MIN(nb_err, sizeof(_packet_data) - 5/*node_id, own_id, command_id, byte_cnt, lrc*/); i++)
       {
         error_callback(node_addr, _packet_data[i + DATA_START_BYTE_NUM]);
       }
